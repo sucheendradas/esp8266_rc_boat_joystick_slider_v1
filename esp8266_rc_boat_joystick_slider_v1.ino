@@ -15,6 +15,11 @@ const char* pass = "$123@Mac";      // Wi-Fi password
 #define MOTOR_B_IN3 D6  // Right motor forward signal
 #define MOTOR_B_IN4 D7  // Right motor reverse signal
 
+// Add these constants at top of code
+#define MIN_SPEED 50    // Minimum effective PWM value (motors won't spin below this)
+#define MAX_SPEED 220   // Safety limit to prevent full-battery speed
+#define SPEED_STEPS 5   // Number of speed increments (for non-linear control)
+
 /*============ LIBRARY INCLUDES ============*/
 #include <ESP8266WiFi.h>       // ESP8266 core WiFi library
 #include <BlynkSimpleEsp8266.h>// Blynk IoT platform integration
@@ -90,11 +95,17 @@ BLYNK_WRITE(V1) {
 
 // Speed input (Vertical slider on V2)
 BLYNK_WRITE(V2) {
-  if (emergencyStop) return; // Ignore input during emergency stop
-  boatSpeed = param.asInt(); // Update speed (0-255 PWM value)
-  updateMotors(); // Apply changes immediately
+  if (emergencyStop) return;
+  
+  // Original linear mapping
+  // boatSpeed = map(param.asInt(), 0, 255, MIN_SPEED, MAX_SPEED);
+  
+  // Non-linear mapping (quadratic curve for better low-speed control)
+  float normalized = param.asInt() / 255.0;
+  boatSpeed = (int)(MIN_SPEED + (MAX_SPEED - MIN_SPEED) * normalized * normalized);
+  
+  updateMotors();
 }
-
 // Direction toggle (Switch on V3)
 BLYNK_WRITE(V3) {
   if (emergencyStop) return; // Ignore input during emergency stop
