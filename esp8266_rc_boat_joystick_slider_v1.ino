@@ -14,7 +14,7 @@ const char* pass = "$123@Mac";
 #define MOTOR_B_IN3 D6  // Right motor forward
 #define MOTOR_B_IN4 D7  // Right motor reverse
 
-int throttle = 0;      // Vertical slider (0-1024)
+int throttle = 0;      // Vertical slider (0-1024)//350 to 675
 int steering = 512;    // Horizontal slider (0-1024, center = straight)
 float steeringOffsetScale = 0.4;  // Steering sensitivity (0.0 to 0.5)
 
@@ -64,18 +64,18 @@ void updateMotors() {
 }
 
 
-BLYNK_WRITE(V2) {
+BLYNK_WRITE(V2) { // Vertical Slider
   throttle = param.asInt();
   updateMotors();
 }
 
-BLYNK_WRITE(V1) {
+BLYNK_WRITE(V1) {// Horizontal Slider
   steering = param.asInt();
   updateMotors();
 }
 
-BLYNK_WRITE(V5) {
-  steeringOffsetScale = param.asInt() / 100.0;  // Slider 0–50 → scale 0.0 to 0.5
+BLYNK_WRITE(V0) {//Horizontal Slider
+  steeringOffsetScale = param.asInt() / 100.0;  // Slider , integer 0–50 → scale 0.0 to 0.5
 }
 
 void setup() {
