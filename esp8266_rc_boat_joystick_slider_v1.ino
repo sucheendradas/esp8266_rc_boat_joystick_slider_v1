@@ -1,10 +1,12 @@
-#define BLYNK_TEMPLATE_ID "TMPL3l-s3Bs7t"
-#define BLYNK_TEMPLATE_NAME "RC boat esp8266"
+#define BLYNK_TEMPLATE_ID "TMPL3E97YKwyN"
+#define BLYNK_TEMPLATE_NAME "Rcboat"
 #define BLYNK_AUTH_TOKEN "gbT9odNuyrO_mez7GzXKm1wJ1RWiWNnq"
 
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
+#include <ArduinoOTA.h>
 
+//hotspot 
 const char* ssid = "eDragon";
 const char* pass = "$123@Mac";
 
@@ -86,8 +88,13 @@ void setup() {
   pinMode(MOTOR_A_IN2, OUTPUT);
   pinMode(MOTOR_B_IN3, OUTPUT);
   pinMode(MOTOR_B_IN4, OUTPUT);
+
+  // OTA setup
+  ArduinoOTA.setHostname("RC-Boat"); // Optional name
+  ArduinoOTA.begin();
 }
 
 void loop() {
   Blynk.run();
+  ArduinoOTA.handle(); // Important!
 }
