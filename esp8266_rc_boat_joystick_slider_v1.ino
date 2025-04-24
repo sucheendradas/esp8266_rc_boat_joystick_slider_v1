@@ -1,3 +1,5 @@
+
+//NodeMCU 1.0 (ESP - 12E MODULE )
 #define BLYNK_TEMPLATE_ID "TMPL3E97YKwyN"
 #define BLYNK_TEMPLATE_NAME "Rcboat"
 #define BLYNK_AUTH_TOKEN "gbT9odNuyrO_mez7GzXKm1wJ1RWiWNnq"
