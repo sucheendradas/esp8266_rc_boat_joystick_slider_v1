@@ -9,8 +9,8 @@
 #include <ArduinoOTA.h>
 
 //hotspot 
-const char* ssid = "eDragon";
-const char* pass = "$123@Mac";
+const char* ssid = "ewDragon";
+const char* pass = "$1234@Mac";
 
 // Motor control pins
 #define MOTOR_A_IN1 D2  // Left motor forward
