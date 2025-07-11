@@ -1,16 +1,17 @@
 
 //NodeMCU 1.0 (ESP - 12E MODULE )
+//Blink LED TEST - LED_BUILTIN
 #define BLYNK_TEMPLATE_ID "TMPL3E97YKwyN"
 #define BLYNK_TEMPLATE_NAME "Rcboat"
-#define BLYNK_AUTH_TOKEN "gbT9odNuyrO_mez7GzXKm1wJ1RWiWNnq"
+#define BLYNK_AUTH_TOKEN "CE28b_Olvnooa5LHd2755pyZss3gBSJo"
 
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <ArduinoOTA.h>
 
 //hotspot 
-const char* ssid = "ewDragon";
-const char* pass = "$1234@Mac";
+const char* ssid = "eDragon";
+const char* pass = "$123@Mac";
 
 // Motor control pins
 #define MOTOR_A_IN1 D2  // Left motor forward
@@ -68,17 +69,17 @@ void updateMotors() {
 }
 
 
-BLYNK_WRITE(V2) { // Vertical Slider
+BLYNK_WRITE(V1) { // Vertical Slider
   throttle = param.asInt();
   updateMotors();
 }
 
-BLYNK_WRITE(V1) {// Horizontal Slider
+BLYNK_WRITE(V0) {// Horizontal Slider
   steering = param.asInt();
   updateMotors();
 }
 
-BLYNK_WRITE(V0) {//Horizontal Slider
+BLYNK_WRITE(V2) {//Horizontal Slider
   steeringOffsetScale = param.asInt() / 100.0;  // Slider , integer 0–50 → scale 0.0 to 0.5
 }
 
